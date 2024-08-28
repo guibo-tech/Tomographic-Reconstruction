@@ -70,6 +70,8 @@ for i, s in enumerate(slices):
     img2d = s.pixel_array
     img3d[:, :, i] = img2d
 
+# Following is plotting the middel of the slices
+
 # plot 3 orthogonal slices
 a1 = plt.subplot(2, 2, 1)
 plt.imshow(img3d[:, :, img_shape[2]//2])

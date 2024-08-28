@@ -12,9 +12,24 @@ import matplotlib.pyplot as plt
 
 from scipy.interpolate import RectBivariateSpline
 from skimage.data import shepp_logan_phantom
+from skimage.data import binary_blobs
 from skimage.transform import radon, rescale, rotate
 
-image = shepp_logan_phantom()
+from PIL import Image
+
+# Open an image file
+image_path = "ct_scan.jpg"
+with Image.open(image_path) as img:
+    # Convert image to grayscale (optional)
+    img = img.convert('L')
+    # Convert to NumPy array
+    image = np.array(img)
+
+image = image / np.max(image)
+
+# image = shepp_logan_phantom()
+# image = binary_blobs(length=256, volume_fraction=0.5, n_dim=2)
+
 # image = np.ones([100,100])
 # Resize Image
 # diag = len(np.diag(image)//2)
@@ -37,7 +52,7 @@ ax[1].pcolor(xv,yv,image_rot, shading='auto')
 plt.show()
 
 # Change step angle to 1° for better results, calculation will be slower
-thetas = np.arange(0,180,5) * np.pi/180 # Rotations, from 0 to 180°, every 5°, then converts to radians.
+thetas = np.arange(0,180,1) * np.pi/180 # Rotations, from 0 to 180°, every 5°, then converts to radians.
 rs = _
 dtheta = np.diff(thetas)[0] # the difference between the data in the array
 dr = np.diff(rs)[0]

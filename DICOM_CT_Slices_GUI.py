@@ -1,99 +1,123 @@
-#Download more examples https://www.dicomlibrary.com/
-
-# USAGE: python DICOM_CT_Slices_GUI.py "E:/data/CT_Anonymized_20240829/*.dcm" 50 100 150
+# Download DICOM examples: https://www.dicomlibrary.com/
 
 import pydicom
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import tkinter as tk
+from tkinter import filedialog, messagebox
 import glob
 
-# Function to display specific slices
-def plot_slices(img3d, ax_aspect, sag_aspect, cor_aspect, axial_index, sagittal_index, coronal_index):
-    fig, axes = plt.subplots(2, 2, figsize=(12, 12))
+class DICOM_CT_Slices_GUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("DICOM Slices Viewer")
 
-    # Axial view
-    axes[0, 0].imshow(img3d[:, :, axial_index], cmap='gray')
-    axes[0, 0].set_title(f'Axial Slice {axial_index}')
-    axes[0, 0].set_aspect(ax_aspect)
+        # Initialize variables
+        self.img3d = None
+        self.ax_aspect = 1
+        self.sag_aspect = 1
+        self.cor_aspect = 1
 
-    # Sagittal view
-    axes[0, 1].imshow(img3d[:, sagittal_index, :], cmap='gray')
-    axes[0, 1].set_title(f'Sagittal Slice {sagittal_index}')
-    axes[0, 1].set_aspect(sag_aspect)
+        # Create and place widgets
+        self.load_button = tk.Button(root, text="Load DICOM Files", command=self.load_files)
+        self.load_button.pack(pady=10)
 
-    # Coronal view
-    axes[1, 0].imshow(img3d[coronal_index, :, :].T, cmap='gray')
-    axes[1, 0].set_title(f'Coronal Slice {coronal_index}')
-    axes[1, 0].set_aspect(cor_aspect)
+        self.axial_label = tk.Label(root, text="Axial Slice Index:")
+        self.axial_label.pack(pady=5)
+        self.axial_index = tk.Entry(root)
+        self.axial_index.pack(pady=5)
 
-    # Empty bottom-right corner
-    axes[1, 1].axis('off')
+        self.sagittal_label = tk.Label(root, text="Sagittal Slice Index:")
+        self.sagittal_label.pack(pady=5)
+        self.sagittal_index = tk.Entry(root)
+        self.sagittal_index.pack(pady=5)
 
-    plt.show()
+        self.coronal_label = tk.Label(root, text="Coronal Slice Index:")
+        self.coronal_label.pack(pady=5)
+        self.coronal_index = tk.Entry(root)
+        self.coronal_index.pack(pady=5)
 
-# Check if sufficient arguments are provided
-if len(sys.argv) < 5:
-    print("Usage: python DICOM_CT_Slices.py <glob> <axial_index> <sagittal_index> <coronal_index>")
-    sys.exit(1)
+        self.plot_button = tk.Button(root, text="Plot Slices", command=self.plot_slices)
+        self.plot_button.pack(pady=10)
 
-# Get the file pattern and slice indices from command line arguments
-file_pattern = sys.argv[1]
-axial_index = int(sys.argv[2])
-sagittal_index = int(sys.argv[3])
-coronal_index = int(sys.argv[4])
+        self.figure = plt.Figure(figsize=(12, 12))
+        self.canvas = FigureCanvasTkAgg(self.figure, master=self.root)
+        self.canvas_widget = self.canvas.get_tk_widget()
+        self.canvas_widget.pack()
 
-# Load the DICOM files
-files = []
-for fname in glob.glob(file_pattern, recursive=False):
-    print(f"Loading: {fname}")
-    files.append(pydicom.dcmread(fname))
+    def load_files(self):
+        file_pattern = filedialog.askopenfilename(filetypes=[("DICOM Files", "*.dcm")], multiple=True)
+        if not file_pattern:
+            return
 
-print(f"File count: {len(files)}")
+        files = [pydicom.dcmread(fname) for fname in file_pattern]
+        slices = [f for f in files if hasattr(f, 'SliceLocation')]
 
-# Skip files with no SliceLocation (e.g., scout views)
-slices = []
-skipcount = 0
-for f in files:
-    if hasattr(f, 'SliceLocation'):
-        slices.append(f)
-    else:
-        skipcount += 1
+        if not slices:
+            messagebox.showerror("Error", "No valid DICOM slices found.")
+            return
 
-print(f"Skipped, no SliceLocation: {skipcount}")
+        slices = sorted(slices, key=lambda s: s.SliceLocation)
+        ps = slices[0].PixelSpacing
+        ss = slices[0].SliceThickness
+        self.ax_aspect = ps[1] / ps[0]
+        self.sag_aspect = ps[1] / ss
+        self.cor_aspect = ss / ps[0]
 
-# Ensure they are in the correct order
-slices = sorted(slices, key=lambda s: s.SliceLocation)
+        img_shape = list(slices[0].pixel_array.shape)
+        img_shape.append(len(slices))
+        self.img3d = np.zeros(img_shape)
 
-# Pixel aspects, assuming all slices are the same
-ps = slices[0].PixelSpacing
-ss = slices[0].SliceThickness
-ax_aspect = ps[1] / ps[0]
-sag_aspect = ps[1] / ss
-cor_aspect = ss / ps[0]
+        for i, s in enumerate(slices):
+            img2d = s.pixel_array
+            self.img3d[:, :, i] = img2d
 
-# Create 3D array
-img_shape = list(slices[0].pixel_array.shape)
-img_shape.append(len(slices))
-img3d = np.zeros(img_shape)
+        messagebox.showinfo("Info", "DICOM files loaded successfully.")
 
-# Fill 3D array with the images from the files
-for i, s in enumerate(slices):
-    img2d = s.pixel_array
-    img3d[:, :, i] = img2d
+    def plot_slices(self):
+        if self.img3d is None:
+            messagebox.showerror("Error", "No DICOM files loaded.")
+            return
 
-# Validate indices
-if axial_index < 0 or axial_index >= img_shape[2]:
-    print(f"Error: axial_index {axial_index} is out of range.")
-    sys.exit(1)
+        try:
+            axial_idx = int(self.axial_index.get())
+            sagittal_idx = int(self.sagittal_index.get())
+            coronal_idx = int(self.coronal_index.get())
+        except ValueError:
+            messagebox.showerror("Error", "Invalid slice indices.")
+            return
 
-if sagittal_index < 0 or sagittal_index >= img_shape[1]:
-    print(f"Error: sagittal_index {sagittal_index} is out of range.")
-    sys.exit(1)
+        if (axial_idx < 0 or axial_idx >= self.img3d.shape[2] or
+            sagittal_idx < 0 or sagittal_idx >= self.img3d.shape[1] or
+            coronal_idx < 0 or coronal_idx >= self.img3d.shape[0]):
+            messagebox.showerror("Error", "Slice index out of range.")
+            return
 
-if coronal_index < 0 or coronal_index >= img_shape[0]:
-    print(f"Error: coronal_index {coronal_index} is out of range.")
-    sys.exit(1)
+        self.figure.clear()
 
-# Plot the selected slices
-plot_slices(img3d, ax_aspect, sag_aspect, cor_aspect, axial_index, sagittal_index, coronal_index)
+        # Create subplots
+        ax1 = self.figure.add_subplot(2, 2, 1)
+        ax1.imshow(self.img3d[:, :, axial_idx], cmap='gray')
+        ax1.set_title(f'Axial Slice {axial_idx}')
+        ax1.set_aspect(self.ax_aspect)
+
+        ax2 = self.figure.add_subplot(2, 2, 2)
+        ax2.imshow(self.img3d[:, sagittal_idx, :], cmap='gray')
+        ax2.set_title(f'Sagittal Slice {sagittal_idx}')
+        ax2.set_aspect(self.sag_aspect)
+
+        ax3 = self.figure.add_subplot(2, 2, 3)
+        ax3.imshow(self.img3d[coronal_idx, :, :].T, cmap='gray')
+        ax3.set_title(f'Coronal Slice {coronal_idx}')
+        ax3.set_aspect(self.cor_aspect)
+
+        # Empty bottom-right corner
+        self.figure.add_subplot(2, 2, 4).axis('off')
+
+        self.canvas.draw()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = DICOM_CT_Slices_GUI(root)
+    root.mainloop()

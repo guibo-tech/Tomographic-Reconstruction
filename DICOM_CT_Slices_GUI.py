@@ -1,3 +1,7 @@
+#Download more examples https://www.dicomlibrary.com/
+
+# USAGE: python DICOM_CT_Slices_GUI.py "E:/data/CT_Anonymized_20240829/*.dcm" 50 100 150
+
 import pydicom
 import numpy as np
 import matplotlib.pyplot as plt

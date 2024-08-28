@@ -1,0 +1,52 @@
+asttokens==2.4.1
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1720457958366/work/certifi
+comm==0.2.2
+contourpy @ file:///D:/bld/contourpy_1712430020791/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1696677705766/work
+debugpy==1.8.5
+decorator==5.1.1
+exceptiongroup==1.2.2
+executing==2.0.1
+fonttools @ file:///D:/bld/fonttools_1720359129126/work
+imagecodecs @ file:///D:/bld/imagecodecs_1722899567327/work
+imageio @ file:///home/conda/feedstock_root/build_artifacts/imageio_1724069053555/work
+importlib_metadata==8.4.0
+importlib_resources @ file:///home/conda/feedstock_root/build_artifacts/importlib_resources_1724314645569/work
+ipykernel==6.29.5
+ipython==8.18.1
+jedi==0.19.1
+jupyter_client==8.6.2
+jupyter_core==5.7.2
+kiwisolver @ file:///D:/bld/kiwisolver_1695380110085/work
+lazy_loader @ file:///home/conda/feedstock_root/build_artifacts/lazy-loader_1723774329602/work
+matplotlib==3.9.2
+matplotlib-inline==0.1.7
+munkres==1.1.4
+nest-asyncio==1.6.0
+networkx @ file:///home/conda/feedstock_root/build_artifacts/networkx_1698504735452/work
+numpy @ file:///D:/bld/numpy_1724748780351/work/dist/numpy-2.0.2-cp39-cp39-win_amd64.whl#sha256=334c14ce8633236a51e51938005a9b798af35115c90203969c42602689076834
+packaging==24.1
+parso==0.8.4
+pillow @ file:///D:/bld/pillow_1719903705592/work
+platformdirs==4.2.2
+prompt_toolkit==3.0.47
+psutil==6.0.0
+pure_eval==0.2.3
+Pygments==2.18.0
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1724616129934/work
+PySide6==6.7.2
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
+PyWavelets==1.6.0
+pywin32==306
+pyzmq==26.2.0
+scikit-image @ file:///D:/bld/scikit-image_1723842294643/work
+scipy @ file:///C:/bld/scipy-split_1716470385682/work/dist/scipy-1.13.1-cp39-cp39-win_amd64.whl#sha256=490e922ef930c40e74290d95915a98295b9059d02849059317bab82ba7810581
+shiboken6==6.7.2
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+stack-data==0.6.3
+tifffile @ file:///home/conda/feedstock_root/build_artifacts/tifffile_1718963615451/work
+tornado==6.4.1
+traitlets==5.14.3
+unicodedata2 @ file:///D:/bld/unicodedata2_1695847967701/work
+wcwidth==0.2.13
+zipp==3.20.1

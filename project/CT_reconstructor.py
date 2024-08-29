@@ -17,17 +17,16 @@ from skimage.transform import radon, rescale, rotate
 
 from PIL import Image
 
-# Open an image file
-image_path = "ct_scan.jpg"
-with Image.open(image_path) as img:
-    # Convert image to grayscale (optional)
-    img = img.convert('L')
-    # Convert to NumPy array
-    image = np.array(img)
+# # Open an image file
+# image_path = "data/ct_scan.jpg"
+# with Image.open(image_path) as img:
+#     # Convert image to grayscale (optional)
+#     img = img.convert('L')
+#     # Convert to NumPy array
+#     image = np.array(img)
+# image = image / np.max(image)
 
-image = image / np.max(image)
-
-# image = shepp_logan_phantom()
+image = shepp_logan_phantom()
 # image = binary_blobs(length=256, volume_fraction=0.5, n_dim=2)
 
 # image = np.ones([100,100])

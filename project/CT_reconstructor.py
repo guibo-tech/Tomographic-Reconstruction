@@ -42,19 +42,36 @@ def load_image():
     return image
 
 
-def plot_images(image, image_rot):
-    """Plot and save original and rotated images."""
+def plot_images(image, image_rot, colormap='gray'):
+    """Plot and save original and rotated images with customizable colormap."""
     _ = np.linspace(-1, 1, image.shape[0])
     xv, yv = np.meshgrid(_, _)
 
-    fig, ax = plt.subplots(1, 2, figsize=(10, 5))
-    ax[0].pcolor(xv, yv, image, shading='auto')
-    ax[1].pcolor(xv, yv, image_rot, shading='auto')
+    fig, ax = plt.subplots(1, 2, figsize=(12, 6))
+
+    # Display the images using imshow to preserve aspect ratio
+    im1 = ax[0].imshow(image, cmap=colormap, extent=[xv.min(), xv.max(), yv.min(), yv.max()])
+    im2 = ax[1].imshow(image_rot, cmap=colormap, extent=[xv.min(), xv.max(), yv.min(), yv.max()])
+
+    # Add colorbars to a separate axis
+    fig.colorbar(im1, ax=ax[0], fraction=0.046, pad=0.04)
+    fig.colorbar(im2, ax=ax[1], fraction=0.046, pad=0.04)
+
+    # Adjust the layout to prevent distortion
+    plt.tight_layout()
+
     plt.savefig(f'{output_dir}/original_and_rotated.png')
     plt.close(fig)
 
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
-    ax.pcolor(xv, yv, image, shading='auto')
+    fig, ax = plt.subplots(1, 1, figsize=(6, 6))
+    im = ax.imshow(image, cmap=colormap, extent=[xv.min(), xv.max(), yv.min(), yv.max()])
+
+    # Add a colorbar to a separate axis
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+
+    # Adjust the layout to prevent distortion
+    plt.tight_layout()
+
     plt.savefig(f'{output_dir}/original.png')
     plt.close(fig)
 
@@ -72,15 +89,15 @@ def perform_radon_transform(image):
     return thetas, rs, p, dtheta
 
 
-def plot_radon_results(thetas, rs, p):
-    """Plot Radon transform results: projection vs r and sinogram."""
+def plot_radon_results(thetas, rs, p, colormap='gray'):
+    """Plot Radon transform results: projection vs r and sinogram with customizable colormap."""
     plt.plot(rs, p[:, 0])
     plt.xlabel('r', fontsize=20)
     plt.ylabel('$\ln(I_0/I)$', fontsize=20)
     plt.savefig(f'{output_dir}/p_vs_r.png')
     plt.close()
 
-    plt.pcolor(thetas, rs, p, shading='auto')
+    plt.pcolor(thetas, rs, p, shading='auto', cmap=colormap)
     plt.xlabel(r'$\theta$', fontsize=20)
     plt.ylabel('$r$', fontsize=20)
     plt.savefig(f'{output_dir}/sinogram.png')
@@ -99,10 +116,10 @@ def filtered_back_projection(p, rs, thetas, dtheta):
     return fBP
 
 
-def plot_filtered_back_projection(fBP):
-    """Plot and save the filtered back projection result."""
+def plot_filtered_back_projection(fBP, colormap='gray'):
+    """Plot and save the filtered back projection result with customizable colormap."""
     plt.figure(figsize=(6, 6))
-    plt.pcolor(fBP)
+    plt.pcolor(fBP, cmap=colormap)
     plt.savefig(f'{output_dir}/filtered_back_projection.png')
     plt.close()
 
@@ -124,55 +141,55 @@ def fourier_transform(p, rs, thetas, dtheta):
     return f
 
 
-def plot_fourier_reconstruction(f):
-    """Plot and save the Fourier reconstruction result."""
+def plot_fourier_reconstruction(f, colormap='gray'):
+    """Plot and save the Fourier reconstruction result with customizable colormap."""
     plt.figure(figsize=(6, 6))
-    plt.pcolor(f)
+    plt.pcolor(f, cmap=colormap)
     plt.savefig(f'{output_dir}/reconstructed_image.png')
     plt.close()
 
 
-def plot_slice(image, filename):
-    """Plot and save a slice of the image."""
+def plot_slice(image, filename, colormap='gray'):
+    """Plot and save a slice of the image with customizable colormap."""
     plt.plot(image[110])
-    plt.savefig(f'{output_dir}/{filename}')
+    plt.savefig(f'{output_dir}/{filename}.png')
     plt.close()
 
 
-def radon_and_iradon_reconstruction(image):
-    """Perform Radon transform and reconstruction using iradon."""
+def radon_and_iradon_reconstruction(image, colormap='gray'):
+    """Perform Radon transform and reconstruction using iradon with customizable colormap."""
     theta = np.arange(0., 180., 5)
     sinogram = radon(image, theta=theta)
-    plt.pcolor(sinogram)
+    plt.pcolor(sinogram, cmap=colormap)
     plt.savefig(f'{output_dir}/sinogram_radon.png')
     plt.close()
 
     reconstruction_img = iradon(sinogram, theta=theta, filter_name='ramp')
     plt.figure(figsize=(6, 6))
-    plt.pcolor(reconstruction_img)
+    plt.pcolor(reconstruction_img, cmap=colormap)
     plt.savefig(f'{output_dir}/iradon_reconstruction.png')
     plt.close()
 
-    plot_slice(reconstruction_img, 'slice_of_iradon_reconstruction.png')
+    plot_slice(reconstruction_img, 'slice_of_iradon_reconstruction', colormap)
 
 
-def main():
+def main(colormap='gray'):
     image = load_image()
     image_rot = rotate(image, 45)
-    plot_images(image, image_rot)
+    plot_images(image, image_rot, colormap)
 
     thetas, rs, p, dtheta = perform_radon_transform(image)
-    plot_radon_results(thetas, rs, p)
+    plot_radon_results(thetas, rs, p, colormap)
 
     fBP = filtered_back_projection(p, rs, thetas, dtheta)
-    plot_filtered_back_projection(fBP)
+    plot_filtered_back_projection(fBP, colormap)
 
     f = fourier_transform(p, rs, thetas, dtheta)
-    plot_fourier_reconstruction(f)
-    plot_slice(f, 'slice_of_reconstructed_image.png')
+    plot_fourier_reconstruction(f, colormap)
+    plot_slice(f, 'slice_of_reconstructed_image', colormap)
 
-    radon_and_iradon_reconstruction(image)
+    radon_and_iradon_reconstruction(image, colormap)
 
 
 if __name__ == "__main__":
-    main()
+    main(colormap='gray')  # You can change 'gray' to any other colormap like 'viridis', 'plasma', etc.

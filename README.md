@@ -2,7 +2,7 @@
 
 This project demonstrates the process of reconstructing images from tomographic data using custom methods. The primary focus is on the Shepp-Logan phantom, a widely used digital phantom for testing and validating image reconstruction algorithms.
 
-## Demo - Shepp-Logan phantom
+## Demo - Shepp-Logan Phantom
 
 Below is an overview of the tomographic reconstruction process. The images are shown side by side to illustrate each step.
 

@@ -38,24 +38,24 @@ Below is an overview of the CT scan reconstruction process. The images are shown
 <table>
   <tr>
     <td align="center">
-      <img src="assets/ct_scan/original.png" alt="Original CT Image" width="150"/><br>
-      <b>Original CT Image</b>
+      <img src="assets/ct_scan/original.png" alt="Original Image" width="150"/><br>
+      <b>Original Image</b>
     </td>
     <td align="center">
-      <img src="assets/ct_scan/sinogram.png" alt="CT Sinogram" width="150"/><br>
-      <b>CT Sinogram</b>
+      <img src="assets/ct_scan/sinogram.png" alt="Sinogram" width="150"/><br>
+      <b>Sinogram</b>
     </td>
     <td align="center">
-      <img src="assets/ct_scan/filtered_back_projection.png" alt="CT Filtered Back Projection" width="150"/><br>
-      <b>CT Filtered Back Projection</b>
+      <img src="assets/ct_scan/filtered_back_projection.png" alt="Filtered Back Projection" width="150"/><br>
+      <b>Filtered Back Projection</b>
     </td>
     <td align="center">
-      <img src="assets/ct_scan/reconstructed_image.png" alt="CT Reconstructed Image" width="150"/><br>
-      <b>CT Reconstructed Image</b>
+      <img src="assets/ct_scan/reconstructed_image.png" alt="Reconstructed Image" width="150"/><br>
+      <b>Reconstructed Image</b>
     </td>
     <td align="center">
-      <img src="assets/ct_scan/slice_of_reconstructed_image.png" alt="CT Slice of Reconstructed Image" width="150"/><br>
-      <b>CT Slice of Reconstructed Image</b>
+      <img src="assets/ct_scan/slice_of_reconstructed_image.png" alt="Slice of Reconstructed Image" width="150"/><br>
+      <b>Slice of Reconstructed Image</b>
     </td>
   </tr>
 </table>
@@ -70,27 +70,27 @@ The Shepp-Logan phantom is a digital phantom that simulates the attenuation prof
 ### Original Image
 This image shows the original Shepp-Logan phantom before any transformations or reconstruction algorithms are applied.
 
-![Original Image](assets/shepp_logan_phantom/original.png)
+![Original Image](assets/shepp_logan_phantom_plasma/original.png)
 
 ### Sinogram
 This image represents the sinogram obtained from the Radon transform of the original Shepp-Logan phantom. The sinogram captures the projections of the phantom at various angles.
 
-![Sinogram](assets/shepp_logan_phantom/sinogram.png)
+![Sinogram](assets/shepp_logan_phantom_plasma/sinogram.png)
 
 ### Filtered Back Projection (FBP)
 This image shows the result of the custom filtered back projection (FBP) method applied to the sinogram. FBP is a classic reconstruction technique used to reconstruct images from projection data.
 
-![Filtered Back Projection](assets/shepp_logan_phantom/filtered_back_projection.png)
+![Filtered Back Projection](assets/shepp_logan_phantom_plasma/filtered_back_projection.png)
 
 ### Reconstructed Image
 This image displays the result of the custom reconstruction using Fourier transforms and interpolation techniques. It demonstrates an alternative reconstruction method based on frequency domain processing.
 
-![Reconstructed Image](assets/shepp_logan_phantom/reconstructed_image.png)
+![Reconstructed Image](assets/shepp_logan_phantom_plasma/reconstructed_image.png)
 
 ### Slice of Reconstructed Image
 This plot shows a specific slice (the 110th row) of the reconstructed image. It provides a detailed view of the reconstruction result.
 
-![Slice of Reconstructed Image](assets/shepp_logan_phantom/slice_of_reconstructed_image.png)
+![Slice of Reconstructed Image](assets/shepp_logan_phantom_plasma/slice_of_reconstructed_image.png)
 
 ## How to Run the Code
 

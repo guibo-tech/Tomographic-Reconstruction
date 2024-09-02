@@ -31,9 +31,37 @@ Below is an overview of the tomographic reconstruction process. The images are s
   </tr>
 </table>
 
+## DEMO - CT Scan
+
+Below is an overview of the CT scan reconstruction process. The images are shown side by side to illustrate each step.
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/ct_scan/original.png" alt="Original CT Image" width="150"/><br>
+      <b>Original CT Image</b>
+    </td>
+    <td align="center">
+      <img src="assets/ct_scan/sinogram.png" alt="CT Sinogram" width="150"/><br>
+      <b>CT Sinogram</b>
+    </td>
+    <td align="center">
+      <img src="assets/ct_scan/filtered_back_projection.png" alt="CT Filtered Back Projection" width="150"/><br>
+      <b>CT Filtered Back Projection</b>
+    </td>
+    <td align="center">
+      <img src="assets/ct_scan/reconstructed_image.png" alt="CT Reconstructed Image" width="150"/><br>
+      <b>CT Reconstructed Image</b>
+    </td>
+    <td align="center">
+      <img src="assets/ct_scan/slice_of_reconstructed_image.png" alt="CT Slice of Reconstructed Image" width="150"/><br>
+      <b>CT Slice of Reconstructed Image</b>
+    </td>
+  </tr>
+</table>
 
 
-## Reconstruction Steps
+## Reconstruction Steps - Shepp-Logan Phantom
 
 The following images illustrate different stages and methods of tomographic reconstruction using the Shepp-Logan phantom:
 The Shepp-Logan phantom is a digital phantom that simulates the attenuation profiles of different anatomical structures. It is commonly used in the field of computed tomography (CT) for testing and benchmarking reconstruction algorithms.

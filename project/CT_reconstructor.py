@@ -1,7 +1,6 @@
 import numpy as np
 # import matplotlib.pyplot as plt
 import matplotlib
-
 matplotlib.use('TkAgg')  # Or 'Qt5Agg' or 'Agg' for non-interactive environments
 import matplotlib.pyplot as plt
 from scipy.interpolate import RectBivariateSpline

@@ -29,11 +29,15 @@ packaging==24.1
 parso==0.8.4
 pillow @ file:///D:/bld/pillow_1719903705592/work
 platformdirs==4.2.2
+ply @ file:///home/conda/feedstock_root/build_artifacts/ply_1712242996588/work
 prompt_toolkit==3.0.47
 psutil==6.0.0
 pure_eval==0.2.3
+pydicom @ file:///home/conda/feedstock_root/build_artifacts/pydicom_1702744017281/work
 Pygments==2.18.0
 pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1724616129934/work
+PyQt5==5.15.9
+PyQt5-sip @ file:///D:/bld/pyqt-split_1695417932202/work/pyqt_sip
 PySide6==6.7.2
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
 PyWavelets==1.6.0
@@ -42,9 +46,12 @@ pyzmq==26.2.0
 scikit-image @ file:///D:/bld/scikit-image_1723842294643/work
 scipy @ file:///C:/bld/scipy-split_1716470385682/work/dist/scipy-1.13.1-cp39-cp39-win_amd64.whl#sha256=490e922ef930c40e74290d95915a98295b9059d02849059317bab82ba7810581
 shiboken6==6.7.2
+sip @ file:///D:/bld/sip_1697300548918/work
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
 stack-data==0.6.3
 tifffile @ file:///home/conda/feedstock_root/build_artifacts/tifffile_1718963615451/work
+toml @ file:///home/conda/feedstock_root/build_artifacts/toml_1604308577558/work
+tomli @ file:///home/conda/feedstock_root/build_artifacts/tomli_1644342247877/work
 tornado==6.4.1
 traitlets==5.14.3
 unicodedata2 @ file:///D:/bld/unicodedata2_1695847967701/work

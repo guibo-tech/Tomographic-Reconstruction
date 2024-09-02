@@ -106,13 +106,25 @@ git clone https://github.com/guibo-tech/Tomographic-Reconstruction.git
 
 Ensure you have the necessary libraries installed. You can install the required dependencies using:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+pip install -r requirements.txt
+```
 
 3. **Run the Script:**
 
 Load any digital CT image and execute the [script](project/CT_reconstructor.py).
 
+## Unit Testing
 
+To verify the correctness of various functions in the project/CT_reconstructor.py module, unit tests have been provided. These tests ensure that each function performs as expected and handles edge cases appropriately.
 
+Navigate to the Tests Directory:
+
+```bash
+cd tests
+```
+
+Execute the unit tests using Python's built-in unittest module:
+```bash
+python -m unittest test_CT_reconstructor.py
+```

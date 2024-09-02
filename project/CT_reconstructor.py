@@ -18,7 +18,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 def load_image():
     """Load and preprocess the image."""
-    # image = shepp_logan_phantom()
+    image = shepp_logan_phantom()
 
     # # Demo image
     # image = np.ones([100,100])
@@ -30,14 +30,14 @@ def load_image():
     # image = binary_blobs(length=256, volume_fraction=0.5, n_dim=2)
 
     # Demo image
-    # Open an image from device
-    image_path = "../data/ct_scan_1.jpg"
-    with Image.open(image_path) as img:
-        # Convert image to grayscale (optional)
-        img = img.convert('L')
-        # Convert to NumPy array
-        image = np.array(img)
-    image = image / np.max(image)
+    # # Open an image from device
+    # image_path = "../data/ct_scan_1.jpg"
+    # with Image.open(image_path) as img:
+    #     # Convert image to grayscale (optional)
+    #     img = img.convert('L')
+    #     # Convert to NumPy array
+    #     image = np.array(img)
+    # image = image / np.max(image)
 
     return image
 

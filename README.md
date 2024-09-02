@@ -4,19 +4,33 @@ This project demonstrates the process of reconstructing images from tomographic 
 
 ## Demo - Shepp-Logan phantom
 
+## Summary of the Reconstruction Process
+
 Below is an overview of the tomographic reconstruction process. The images are shown side by side to illustrate each step.
 
 <p align="center">
-  <img src="assets/shepp_logan_phantom/original.png" alt="Original Image" width="150"/>
-  <img src="assets/shepp_logan_phantom/sinogram.png" alt="Sinogram" width="150"/>
-  <img src="assets/shepp_logan_phantom/filtered_back_projection.png" alt="Filtered Back Projection" width="150"/>
-  <img src="assets/shepp_logan_phantom/reconstructed_image.png" alt="Reconstructed Image" width="150"/>
-  <img src="assets/shepp_logan_phantom/slice_of_reconstructed_image.png" alt="Slice of Reconstructed Image" width="150"/>
+  <div style="display: inline-block; text-align: center; margin: 10px;">
+    <img src="assets/shepp_logan_phantom/original.png" alt="Original Image" width="150"/>
+    <div><b>Original Image</b></div>
+  </div>
+  <div style="display: inline-block; text-align: center; margin: 10px;">
+    <img src="assets/shepp_logan_phantom/sinogram.png" alt="Sinogram" width="150"/>
+    <div><b>Sinogram</b></div>
+  </div>
+  <div style="display: inline-block; text-align: center; margin: 10px;">
+    <img src="assets/shepp_logan_phantom/filtered_back_projection.png" alt="Filtered Back Projection" width="150"/>
+    <div><b>Filtered Back Projection</b></div>
+  </div>
+  <div style="display: inline-block; text-align: center; margin: 10px;">
+    <img src="assets/shepp_logan_phantom/reconstructed_image.png" alt="Reconstructed Image" width="150"/>
+    <div><b>Reconstructed Image</b></div>
+  </div>
+  <div style="display: inline-block; text-align: center; margin: 10px;">
+    <img src="assets/shepp_logan_phantom/slice_of_reconstructed_image.png" alt="Slice of Reconstructed Image" width="150"/>
+    <div><b>Slice of Reconstructed Image</b></div>
+  </div>
 </p>
 
-<p align="center">
-  <b>Original Image</b> &emsp; <b>Sinogram</b> &emsp; <b>Filtered Back Projection</b> &emsp; <b>Reconstructed Image</b> &emsp; <b>Slice of Reconstructed Image</b>
-</p>
 
 ## Reconstruction Steps
 

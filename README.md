@@ -2,7 +2,23 @@
 
 This project demonstrates the process of reconstructing images from tomographic data using custom methods. The primary focus is on the Shepp-Logan phantom, a widely used digital phantom for testing and validating image reconstruction algorithms.
 
-## Demo Reconstruction
+## Demo - Shepp-Logan phantom
+
+Below is an overview of the tomographic reconstruction process. The images are shown side by side to illustrate each step.
+
+<p align="center">
+  <img src="assets/shepp_logan_phantom/original.png" alt="Original Image" width="150"/>
+  <img src="assets/shepp_logan_phantom/sinogram.png" alt="Sinogram" width="150"/>
+  <img src="assets/shepp_logan_phantom/filtered_back_projection.png" alt="Filtered Back Projection" width="150"/>
+  <img src="assets/shepp_logan_phantom/reconstructed_image.png" alt="Reconstructed Image" width="150"/>
+  <img src="assets/shepp_logan_phantom/slice_of_reconstructed_image.png" alt="Slice of Reconstructed Image" width="150"/>
+</p>
+
+<p align="center">
+  <b>Original Image</b> &emsp; <b>Sinogram</b> &emsp; <b>Filtered Back Projection</b> &emsp; <b>Reconstructed Image</b> &emsp; <b>Slice of Reconstructed Image</b>
+</p>
+
+## Reconstruction Steps
 
 The following images illustrate different stages and methods of tomographic reconstruction using the Shepp-Logan phantom:
 The Shepp-Logan phantom is a digital phantom that simulates the attenuation profiles of different anatomical structures. It is commonly used in the field of computed tomography (CT) for testing and benchmarking reconstruction algorithms.

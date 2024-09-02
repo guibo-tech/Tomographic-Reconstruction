@@ -53,6 +53,12 @@ plt.savefig(f'{output_dir}/original_and_rotated.png')
 plt.close(fig)  # Close the figure
 # plt.show()
 
+fig, ax = plt.subplots(1, 1, figsize=(5, 5))  # Change to a single subplot
+ax.pcolor(xv, yv, image, shading='auto')      # Plot only the original image
+plt.savefig(f'{output_dir}/original.png')     # Save only the original image
+plt.close(fig)  # Close the figure
+# plt.show()  # Commented out to prevent interactive display
+
 # Radon transformation
 # Change step angle to 1° for better results, calculation will be slower
 thetas = np.arange(0, 180, 1) * np.pi / 180  # Rotations, from 0 to 180°, every 5°, then converts to radians.
@@ -65,7 +71,7 @@ rotations = np.array([rotate(image, theta * 180 / np.pi) for theta in thetas])  
 p = np.array([rotation.sum(axis=0) * dr for rotation in rotations]).T
 
 # Plot p versus r
-plt.plot(rs, p[:, 9])
+plt.plot(rs, p[:, 0])
 plt.xlabel('r', fontsize=20)
 plt.ylabel('$\ln(I_0/I)$', fontsize=20)
 plt.savefig(f'{output_dir}/p_vs_r.png')
